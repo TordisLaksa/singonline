@@ -1,6 +1,8 @@
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import { useEffect } from "react";
 import { useParams } from "react-router";
+import { useAuth } from "../AuthProvider";
+import LogoutButton from "../LogoutButton";
 
 interface iPageProps {
     title: string;
@@ -11,6 +13,7 @@ interface iPageProps {
 
 const Page: React.FC<iPageProps> = ({ title, description, children }) => {
     const { slug } = useParams<{slug:string}>()
+    const { loginData } = useAuth();
 
     useEffect(() => {
         document.title = title;
@@ -28,6 +31,11 @@ const Page: React.FC<iPageProps> = ({ title, description, children }) => {
                         {slug && (
                             <IonButtons slot="start">
                                 <IonBackButton defaultHref="/"></IonBackButton>
+                            </IonButtons>
+                        )}
+                        {loginData && (
+                            <IonButtons slot="end">
+                                <LogoutButton></LogoutButton>
                             </IonButtons>
                         )}
                     </IonToolbar>
