@@ -12,6 +12,7 @@ const SongDetails = () => {
         slug: string;
     }
 
+
     const { loginData } = useAuth();
     const [ apiData, setApiData ] = useState<iSong>()
     const { slug } = useParams<{ slug: string}>()
